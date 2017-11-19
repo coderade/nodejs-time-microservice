@@ -7,5 +7,5 @@ const server = http.createServer(service);
 server.listen(3000);
 
 server.on('listening', function() {
-    console.log(`The time microservice is listening on ${server.address().port} in ${service.get('env')} mode.`);
+    console.log(`The time micro-service is listening on ${server.address().port} in ${service.get('env')} mode.`);
 });
