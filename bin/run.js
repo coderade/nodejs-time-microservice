@@ -11,7 +11,7 @@ server.on('listening', function () {
     const announce = () => {
         request.put(`http://127.0.0.1:3000/service/time/${server.address().port}`, (err, res) => {
             if (err) {
-                console.log('Error connecting to Siri');
+                console.log('Error connecting to Coderade bot.');
                 console.log(err);
                 return;
             }
