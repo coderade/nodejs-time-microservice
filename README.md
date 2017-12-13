@@ -11,9 +11,8 @@ to use this service.
 
 ## Resilient Architecture
 As this service has been created to be used with my Slack Bot API project as
-an intent service to process the result the current datetime from a local to be used on my natural
-language processing with [wit.ai](https://wit.ai/).
-
+an intent service to process the result the current datetime from a local to be
+used on my natural language processing with [wit.ai](https://wit.ai/).
 I tried to make it resilient, so the service knows the endpoint address of the
 main bot application (`http://127.0.0.1:3000/service/time`) and it will try
 to announce itself every 30 seconds and to intent it can serve.
@@ -50,6 +49,7 @@ debug my Node.js applications, which you can follow this
 set Node.js environment variables in this IDE.
 
 Otherwise you can pass the Time Zone and Geocoding API keys directly on your command line.
+
 To do this on the root directory of the project run the following command
 passing your `GEOCODE_API_KEY` and `TIMEZONE_API_KEY` as env parameters:
 
@@ -57,12 +57,11 @@ passing your `GEOCODE_API_KEY` and `TIMEZONE_API_KEY` as env parameters:
 
 If everything is ok, the console will show the following message:
 
-`The time micro-service is listening on the http://localhost:PORT in development mode.
-Error connecting to Coderade Bot.`
+`The time micro-service is listening on the http://localhost:PORT in development mode.`
 
 The service will try to connect on the
 [bot application](https://github.com/coderade/nodejs-msb-slack-bot), so if the
-bot application is not running you will receive the following error message:
+bot application is not running you also will receive the following error message:
 
 `Error connecting to Coderade Bot.`
 
@@ -85,7 +84,7 @@ bot application is not running yet, you will receive an error like this.
 
 ### Testing the service
 
-The service has been create to be used with the bot application, but you can test
+This service has been create to be used with the bot application, but you can test
 it using the your browser passing a LOCATION as URL parameter with the announced
 URL on the first message on the console log:
 
@@ -95,7 +94,7 @@ Like the following example:
 
 http://localhost:34977/service/curitiba
 
-And you will receive a json response similar to this:
+You will receive a json response similar to this:
 
 ```json
 {
