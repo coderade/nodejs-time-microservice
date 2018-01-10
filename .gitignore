@@ -4,3 +4,6 @@
 # Project stuff
 app/lib/
 node_modules
+
+# Environment files
+.env

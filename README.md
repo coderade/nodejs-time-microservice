@@ -43,6 +43,22 @@ will be necessary.
 After you create your API key for each one of these API services you will need to
 pass them as environment variables.
 
+This project uses the [dotenv](https://github.com/motdotla/dotenv) module to load the environment variables, so on the 
+root directory of the project use the following command to copy the env example file to the `.env` file that will be 
+used to load the environment variables.
+
+`cp .env-example .env`
+
+Then, you can edit the `GEOCODE_API_KEY` and `TIMEZONE_API_KEY` environment variables with your generated keys, 
+like the following:
+
+```docker
+GEOCODE_API_KEY=0000-0000-0000-0000-0000
+TIMEZONE_API_KEY=0000-0000-0000-0000-0000
+```
+
+You can also pass the environment variables on your IDE.
+
 I use the [WebStorm](https://www.jetbrains.com/webstorm) IDE to
 debug my Node.js applications, which you can follow this
 [tutorial](https://www.jetbrains.com/help/webstorm/run-debug-configuration-node-js.html) to
