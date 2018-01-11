@@ -7,3 +7,6 @@ node_modules
 
 # Environment files
 .env
+
+# Testing files
+.nyc_output
