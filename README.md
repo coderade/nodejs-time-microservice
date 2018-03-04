@@ -1,4 +1,4 @@
-## nodejs-time-microservice
+# nodejs-time-microservice
 
 Simple time micro-service application that returns the local time for a given location.
 
@@ -8,6 +8,10 @@ project.
 
 Will be necessary [to create a Google account](https://accounts.google.com/SignUp?hl=en) and generate a API key for the [Time Zone](https://developers.google.com/maps/documentation/timezone/intro) and [Geocoding](https://developers.google.com/maps/documentation/geocoding/intro) APIs
 to use this service.
+
+## Status
+
+[ ![Codeship Status for coderade/nodejs-time-microservice](https://app.codeship.com/projects/638192e0-0228-0136-46ac-4ef38d9281bc/status?branch=master)](https://app.codeship.com/projects/280043)
 
 ## Resilient Architecture
 As this service has been created to be used with my Slack Bot API project as
