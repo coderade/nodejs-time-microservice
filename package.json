@@ -4,11 +4,13 @@
   "description": "Simple time microservice that returns the local time for a given location.",
   "main": "server/service.js",
   "scripts": {
-    "test": "nyc mocha --recursive test"
+    "start": "node bin/run.js | ./node_modules/.bin/bunyan",
+    "test": "NODE_ENV=test eslint bin server && nyc mocha --recursive test"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bunyan": "^1.8.12",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
     "moment": "^2.19.2",
