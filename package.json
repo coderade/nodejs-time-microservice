@@ -3,9 +3,16 @@
   "version": "1.0.0",
   "description": "Simple time microservice that returns the local time for a given location.",
   "main": "server/service.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coderade/nodejs-time-microservice.git"
+  },
   "scripts": {
     "start": "node bin/run.js | ./node_modules/.bin/bunyan",
     "test": "NODE_ENV=test eslint bin server && nyc mocha --recursive test"
+  },
+  "engines": {
+    "node": "9.0.0"
   },
   "author": "",
   "license": "ISC",
