@@ -98,7 +98,7 @@ bot application is not running yet, you will receive an error like this.
 ```
 
 
-### Testing the service
+### Checking the service
 
 This service has been create to be used with the bot application, but you can test
 it using the your browser passing a LOCATION as URL parameter with the announced
@@ -117,3 +117,22 @@ You will receive a json response similar to this:
 "result": "Wednesday, December 13th 2017, 9:45:46 pm"
 }
 ```
+
+## Testing 
+
+This project use the [Mocha](https://mochajs.org/), [Should](https://shouldjs.github.io/) and 
+[Istanbul](https://istanbul.js.org/) JS libraries to test the insfracture, the services and the Slack and Wit 
+clients.
+
+The tests are on the `test` directory. To run all the the tests, the lint and check your coverage, run the following 
+command:
+
+```
+npm test
+```
+
+or directly on the root of the project use:
+
+```
+nyc mocha --recursive test --exit
+``` 
