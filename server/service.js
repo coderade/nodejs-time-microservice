@@ -5,13 +5,17 @@ const service = express();
 const request = require('superagent');
 const moment = require('moment');
 
-
 const GEOCODE_API_URL = 'https://maps.googleapis.com/maps/api/geocode/json';
 const TIMEZONE_API_URL = 'https://maps.googleapis.com/maps/api/timezone/json';
 
 module.exports = (config) => {
     const log = config.log();
     service.get('/service/:location', (req, res) => {
+
+        if(req.get('X-BOT-SERVICE-TOKEN') !== config.serviceAccessToken){
+            return res.sendStatus(403);
+        }
+
         let locationParam = req.params.location;
         const TIMEZONE_API_KEY = config.googleTimeApiKey;
         const GEOCODE_API_KEY = config.googleGeoApiKey;

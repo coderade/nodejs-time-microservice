@@ -11,7 +11,10 @@ server.on('listening', () => {
     log.info(`The time micro-service is listening on the http://localhost:${server.address().port} in ${service.get('env')} mode.`);
 
     const announce = () => {
-        request.put(`http://127.0.0.1:3000/service/time/${server.address().port}`, (err, res) => {
+        request.put(`http://127.0.0.1:3000/service/time/${server.address().port}`)
+            .set('X-BOT-SERVICE-TOKEN', config.serviceAccessToken)
+            .set('X-BOT-API-TOKEN', config.botApiToken)
+            .end((err, res) => {
             if (err) {
                 log.error('Error connecting to Codebot.');
                 log.debug(err);
