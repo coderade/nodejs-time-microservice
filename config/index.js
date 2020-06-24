@@ -1,26 +1,34 @@
 require('dotenv').config();
 const bunyan = require('bunyan');
-const serviceAccessToken = require('crypto').randomBytes(16).toString('hex').slice(0,32);
+const crypto = require('crypto');
+
+const serviceAccessToken = crypto.randomBytes(16).toString('hex').slice(0, 32);
 
 const log = {
-    development: () => {
-        return bunyan.createLogger({name: 'TIME-SERVICE-dev', level: 'debug'});
-    },
-    production: () => {
-        return bunyan.createLogger({name: 'TIME-SERVICE-prod', level: 'info'});
-    },
-    test: () => {
-        return bunyan.createLogger({name: 'TIME-SERVICE-test', level: 'fatal'});
-    }
+    development: () => bunyan.createLogger({ name: 'TIME-SERVICE-dev', level: 'debug' }),
+    production: () => bunyan.createLogger({ name: 'TIME-SERVICE-prod', level: 'info' }),
+    test: () => bunyan.createLogger({ name: 'TIME-SERVICE-test', level: 'fatal' }),
 };
 
-module.exports = {
+const getLogger = (env) => {
+    const environment = env || process.env.NODE_ENV || 'development';
+    return log[environment] ? log[environment]() : log.development();
+};
+
+const config = {
     googleTimeApiKey: process.env.GOOGLE_TIME_API_KEY,
     googleGeoApiKey: process.env.GOOGLE_GEO_API_KEY,
     botApiToken: process.env.BOT_API_TOKEN,
     serviceAccessToken: serviceAccessToken,
-    log: (env) => {
-        if (env) return log[env]();
-        return log[process.env.NODE_ENV || 'development']();
-    }
+    log: getLogger,
 };
+
+// Validate required environment variables
+const requiredEnvVars = ['GOOGLE_TIME_API_KEY', 'GOOGLE_GEO_API_KEY', 'BOT_API_TOKEN'];
+requiredEnvVars.forEach((varName) => {
+    if (!process.env[varName]) {
+        throw new Error(`Missing required environment variable: ${varName}`);
+    }
+});
+
+module.exports = config;
