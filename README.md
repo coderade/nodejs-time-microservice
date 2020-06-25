@@ -1,94 +1,67 @@
-# nodejs-time-microservice
+# Node.js Time Microservice
 
-Simple time micro-service application that returns the local time for a given location.
+Simple time microservice application that returns the local time for a given location.
 
-This time microservice use the Google [Time Zone](https://developers.google.com/maps/documentation/timezone/intro) and [Geocoding](https://developers.google.com/maps/documentation/geocoding/intro) APIs
-and has been created to be used with my [Slack Bot API](https://github.com/coderade/nodejs-msb-slack-bot)
-project.
+This time microservice uses the Google [Time Zone](https://developers.google.com/maps/documentation/timezone/intro) and [Geocoding](https://developers.google.com/maps/documentation/geocoding/intro) APIs and has been created to be used with my [Slack Bot API](https://github.com/coderade/nodejs-msb-slack-bot) project.
 
-Will be necessary [to create a Google account](https://accounts.google.com/SignUp?hl=en) and generate a API key for the [Time Zone](https://developers.google.com/maps/documentation/timezone/intro) and [Geocoding](https://developers.google.com/maps/documentation/geocoding/intro) APIs
-to use this service.
+You will need to [create a Google account](https://accounts.google.com/SignUp?hl=en) and generate an API key for the [Time Zone](https://developers.google.com/maps/documentation/timezone/intro) and [Geocoding](https://developers.google.com/maps/documentation/geocoding/intro) APIs to use this service.
 
 ## Status
 
-[ ![Codeship Status for coderade/nodejs-time-microservice](https://app.codeship.com/projects/638192e0-0228-0136-46ac-4ef38d9281bc/status?branch=master)](https://app.codeship.com/projects/280043)
+[![Codeship Status for coderade/nodejs-time-microservice](https://app.codeship.com/projects/638192e0-0228-0136-46ac-4ef38d9281bc/status?branch=master)](https://app.codeship.com/projects/280043)
 
 ## Resilient Architecture
-As this service has been created to be used with my Slack Bot API project as
-an intent service to process the result the current datetime from a local to be
-used on my natural language processing with [wit.ai](https://wit.ai/).
-I tried to make it resilient, so the service knows the endpoint address of the
-main bot application (`http://127.0.0.1:3000/service/time`) and it will try
-to announce itself every 30 seconds and to intent it can serve.
 
-The main [bot application](https://github.com/coderade/nodejs-msb-slack-bot) will
-keep track of the services available and route the requests there.
+As this service has been created to be used with my Slack Bot API project as an intent service to process the result of the current datetime from a location to be used on my natural language processing with [wit.ai](https://wit.ai/), I have tried to make it resilient. The service knows the endpoint address of the main bot application (`http://127.0.0.1:3000/service/time`) and it will try to announce itself every 30 seconds to the intent it can serve.
 
-## How to use
+The main [bot application](https://github.com/coderade/nodejs-msb-slack-bot) will keep track of the services available and route the requests there.
 
-Download and install the Node.Js using the [NVM](https://github.com/creationix/nvm).
+## How to Use
 
-Install the [yarn](https://yarnpkg.com/en/) following the official
-[documentation](https://yarnpkg.com/lang/en/docs/install/#linux-tab).
+1. Download and install Node.js using [NVM](https://github.com/creationix/nvm).
+2. Install [yarn](https://yarnpkg.com/en/) following the official [documentation](https://yarnpkg.com/lang/en/docs/install/#linux-tab).
+3. Clone the repository and install the node modules:
+    ```bash
+    yarn install
+    ```
 
-Clone the repository and install the node modules.
+## Running the Service
 
-`yarn install`
+To run this application, an API key for the [Time Zone](https://developers.google.com/maps/documentation/timezone/intro) and [Geocoding](https://developers.google.com/maps/documentation/geocoding/intro) APIs will be necessary.
 
-After this, you can run the service.
+1. Create your API key for each of these API services.
+2. Pass them as environment variables.
 
-## Running the service
+This project uses the [dotenv](https://github.com/motdotla/dotenv) module to load the environment variables. On the root directory of the project, use the following command to copy the example environment file to the `.env` file that will be used to load the environment variables:
+    ```bash
+    cp .env-example .env
+    ```
 
-To run this application, an API key for the
-[Time Zone](https://developers.google.com/maps/documentation/timezone/intro) and [Geocoding](https://developers.google.com/maps/documentation/geocoding/intro) APIs
-will be necessary.
+3. Edit the `GEOCODE_API_KEY` and `TIMEZONE_API_KEY` environment variables with your generated keys, like the following:
+    ```plaintext
+    GEOCODE_API_KEY=0000-0000-0000-0000-0000
+    TIMEZONE_API_KEY=0000-0000-0000-0000-0000
+    ```
 
+4. You can also pass the environment variables on your IDE. I use the [WebStorm](https://www.jetbrains.com/webstorm) IDE to debug my Node.js applications, which you can follow this [tutorial](https://www.jetbrains.com/help/webstorm/run-debug-configuration-node-js.html) to set Node.js environment variables in this IDE.
 
-After you create your API key for each one of these API services you will need to
-pass them as environment variables.
-
-This project uses the [dotenv](https://github.com/motdotla/dotenv) module to load the environment variables, so on the 
-root directory of the project use the following command to copy the env example file to the `.env` file that will be 
-used to load the environment variables.
-
-`cp .env-example .env`
-
-Then, you can edit the `GEOCODE_API_KEY` and `TIMEZONE_API_KEY` environment variables with your generated keys, 
-like the following:
-
-```docker
-GEOCODE_API_KEY=0000-0000-0000-0000-0000
-TIMEZONE_API_KEY=0000-0000-0000-0000-0000
-```
-
-You can also pass the environment variables on your IDE.
-
-I use the [WebStorm](https://www.jetbrains.com/webstorm) IDE to
-debug my Node.js applications, which you can follow this
-[tutorial](https://www.jetbrains.com/help/webstorm/run-debug-configuration-node-js.html) to
-set Node.js environment variables in this IDE.
-
-Otherwise you can pass the Time Zone and Geocoding API keys directly on your command line.
-
-To do this on the root directory of the project run the following command
-passing your `GEOCODE_API_KEY` and `TIMEZONE_API_KEY` as env parameters:
-
-`GEOCODE_API_KEY=<YOUR GEOCODE API KEY> TIMEZONE_API_KEY=<YOUR TIMEZONE API KEY> node bin/run.js`
+5. Otherwise, you can pass the Time Zone and Geocoding API keys directly on your command line. To do this on the root directory of the project, run the following command passing your `GEOCODE_API_KEY` and `TIMEZONE_API_KEY` as env parameters:
+    ```bash
+    GEOCODE_API_KEY=<YOUR GEOCODE API KEY> TIMEZONE_API_KEY=<YOUR TIMEZONE API KEY> node bin/run.js
+    ```
 
 If everything is ok, the console will show the following message:
-
-`The time micro-service is listening on the http://localhost:PORT in development mode.`
-
-The service will try to connect on the
-[bot application](https://github.com/coderade/nodejs-msb-slack-bot), so if the
-bot application is not running you also will receive the following error message:
-
-`Error connecting to Coderade Bot.`
-
-The service will try to connect again every 30 seconds and if the
-bot application is not running yet, you will receive an error like this.
-
+```plaintext
+The time micro-service is listening on http://localhost:PORT in development mode.
 ```
+
+The service will try to connect to the [bot application](https://github.com/coderade/nodejs-msb-slack-bot). If the bot application is not running, you will receive the following error message:
+```plaintext
+Error connecting to Coderade Bot.
+```
+
+The service will try to connect again every 30 seconds. If the bot application is not running yet, you will receive an error like this:
+```plaintext
 { Error: connect ECONNREFUSED 127.0.0.1:3000
     at Object._errnoException (util.js:1031:13)
     at _exceptionWithHostPort (util.js:1052:20)
@@ -101,42 +74,40 @@ bot application is not running yet, you will receive an error like this.
   response: undefined }
 ```
 
+## Checking the Service
 
-### Checking the service
+This service has been created to be used with the bot application, but you can test it using your browser by passing a LOCATION as a URL parameter with the announced URL in the first message on the console log:
 
-This service has been create to be used with the bot application, but you can test
-it using the your browser passing a LOCATION as URL parameter with the announced
-URL on the first message on the console log:
+```plaintext
+http://localhost:PORT/service/<LOCATION>
+```
 
-`http://localhost:PORT/service/<LOCATION>`
-
-Like the following example:
-
+For example:
+```plaintext
 http://localhost:34977/service/curitiba
+```
 
-You will receive a json response similar to this:
-
+You will receive a JSON response similar to this:
 ```json
 {
-"result": "Wednesday, December 13th 2017, 9:45:46 pm"
+  "result": "Wednesday, December 13th 2017, 9:45:46 pm"
 }
 ```
 
-## Testing 
+## Testing
 
-This project use the [Mocha](https://mochajs.org/), [Should](https://shouldjs.github.io/) and 
-[Istanbul](https://istanbul.js.org/) JS libraries to test the insfracture, the services and the Slack and Wit 
-clients.
+This project uses [Mocha](https://mochajs.org/), [Should](https://shouldjs.github.io/), and [Istanbul](https://istanbul.js.org/) JS libraries to test the infrastructure, the services, and the Slack and Wit clients.
 
-The tests are on the `test` directory. To run all the the tests, the lint and check your coverage, run the following 
-command:
-
-```
+The tests are in the `test` directory. To run all the tests, lint the code, and check your coverage, run the following command:
+```bash
 npm test
 ```
 
-or directly on the root of the project use:
-
-```
+Or directly on the root of the project, use:
+```bash
 nyc mocha --recursive test --exit
-``` 
+```
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
