@@ -9,7 +9,9 @@
   },
   "scripts": {
     "start": "node bin/run.js | ./node_modules/.bin/bunyan",
-    "test": "NODE_ENV=test eslint bin server && nyc mocha --recursive test"
+    "test": "NODE_ENV=test eslint bin server && nyc mocha --recursive test",
+    "prepare": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "engines": {
     "node": "9.0.0"
@@ -20,8 +22,9 @@
     "bunyan": "^1.8.13",
     "dotenv": "^4.0.0",
     "express": "^4.16.2",
-    "moment": "^2.19.2",
-    "superagent": "^3.8.2"
+    "moment": "^2.29.4",
+    "superagent": "^3.8.2",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "eslint": "^4.10.0",
@@ -30,5 +33,6 @@
     "nyc": "^11.4.1",
     "should": "^13.2.0",
     "supertest": "^3.0.0"
-  }
+  },
+  "snyk": true
 }
